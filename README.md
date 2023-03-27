@@ -7,7 +7,7 @@ The app leverages LangChain's streaming support and async API to update the page
 
 ## 💻 Demo
 
-![Demo Screen recording](.assets/images/Chat_Your_Data.gif)
+![Demo Screen recording](.assets/images/demo.gif)
 
 ## ✅ Running locally
 - Install dependencies: `pip install -r requirements.txt`
