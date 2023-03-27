@@ -1,13 +1,12 @@
+fastapi==0.95.0
+langchain==0.0.123
+pydantic==1.10.6
+uvicorn==0.21.1
 openai
-fastapi
 black
 isort
 websockets
-pydantic
-langchain
-uvicorn
 jinja2
-faiss-cpu
 bs4
 unstructured
 libmagic

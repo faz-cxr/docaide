@@ -21,7 +21,7 @@ Deployed version (to be updated soon): [Coming soon](https://example.com)
 
 ## 📚 Technical description
 
-Question-Answering has the following steps, all handled by [ChatVectorDBChain](https://langchain.readthedocs.io/en/latest/modules/indexes/chain_examples/chat_vector_db.html):
+Question-Answering has the following steps, all handled by [ConversationalRetrievalChain](https://python.langchain.com/en/latest/modules/chains/index_examples/chat_vector_db.html):
 
 1. Given the chat history and new user input, determine what a standalone question would be (using GPT-3.5-turbo).
 2. Given that standalone question, look up relevant documents from the vectorstore.
