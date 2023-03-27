@@ -7,6 +7,7 @@ The app leverages LangChain's streaming support and async API to update the page
 
 ## 💻 Demo
 
+Copy and pasting a sample PLAB 1 question from GMC website!
 ![Demo Screen recording](assets/images/demo.gif)
 
 ## ✅ Running locally
