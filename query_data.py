@@ -3,11 +3,9 @@ from langchain.callbacks.base import AsyncCallbackManager
 from langchain.callbacks.tracers import LangChainTracer
 from langchain.chains import ConversationalRetrievalChain
 from langchain.prompts import PromptTemplate
-from langchain.chains.chat_vector_db.prompts import CONDENSE_QUESTION_PROMPT
 from langchain.chains.llm import LLMChain
 from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 from langchain.chat_models import PromptLayerChatOpenAI
-from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores.base import VectorStore
 
 import promptlayer
