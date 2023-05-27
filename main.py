@@ -1,7 +1,7 @@
 """Main entrypoint for the app."""
 import logging
 from typing import Optional
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.templating import Jinja2Templates
@@ -9,6 +9,8 @@ from langchain.vectorstores import VectorStore
 from callback import QuestionGenCallbackHandler, StreamingLLMCallbackHandler
 from query_data import get_chain
 from schemas import ChatResponse
+from langchain.vectorstores import Pinecone
+import pinecone
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -19,7 +21,11 @@ vectorstore: Optional[VectorStore] = None
 async def startup_event():
     logging.info("loading vectorstore")
     global vectorstore
-    vectorstore = Chroma(persist_directory='chroma', embedding_function=OpenAIEmbeddings())
+    pinecone.init(
+    api_key="25db0a5b-ee2d-4d5e-86ba-5bce9cd90804",  # find at app.pinecone.io
+    environment="us-east1-gcp"  # next to api key in console
+    )
+    vectorstore = Pinecone.from_existing_index(index_name="cks-summary-1500tiktoken", namespace="full-cks", embedding = OpenAIEmbeddings())
 
 
 @app.get("/")

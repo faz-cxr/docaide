@@ -53,10 +53,14 @@
     <script>
         var endpoint = "ws://localhost:9000/chat";
         var ws = new WebSocket(endpoint);
-        // Receive message from server word by word. Display the words as they are received.
         ws.onmessage = function (event) {
             var messages = document.getElementById('messages');
             var data = JSON.parse(event.data);
+            var convertedMessage = data.message.replace(/(https?:\/\/[^\s]+)/g, function(url) {
+                return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            });
+            convertedMessage = convertedMessage.replace(/\n/g, '<br>');
+
             if (data.sender === "bot") {
                 if (data.type === "start") {
                     var header = document.getElementById('header');
@@ -71,14 +75,14 @@
                     var header = document.getElementById('header');
                     header.innerHTML = "Docaide is typing...";
                     var p = messages.lastChild.lastChild;
-                    if (data.message === "\n") {
+                    if (convertedMessage === "<br>") {
                         p.innerHTML += "<br>";
                     } else {
-                        p.innerHTML += data.message;
+                        p.innerHTML += convertedMessage;
                     }
                 } else if (data.type === "info") {
                     var header = document.getElementById('header');
-                    header.innerHTML = data.message;
+                    header.innerHTML = convertedMessage;
                 } else if (data.type === "end") {
                     var header = document.getElementById('header');
                     header.innerHTML = "Ask a question";
@@ -92,14 +96,14 @@
                     button.innerHTML = "Send";
                     button.disabled = false;
                     var p = messages.lastChild.lastChild;
-                    p.innerHTML += data.message;
+                    p.innerHTML += convertedMessage;
                 }
             } else {
                 var div = document.createElement('div');
                 div.className = 'client-message';
                 var p = document.createElement('p');
                 p.innerHTML = "<strong>" + "You: " + "</strong>";
-                p.innerHTML += data.message;
+                p.innerHTML += convertedMessage;
                 div.appendChild(p);
                 messages.appendChild(div);
             }
@@ -126,7 +130,7 @@
 <body class="bg-black">
     <div class="chat-body card">
         <div class="card-body p-5">
-            <h4 class="card-title text-center text-xl font-medium"> Chat with NICE CKS </h4>
+            <h4 class="card-title text-center text-xl font-medium"> Chat with NICE CKS guidelines </h4>
             <p class="card-text text-center text-sm" id="header"> Ask a question </p>
             <hr class="border-gray-500 mb-5" style="margin-top: 20px;">
             <div id="messages" class="overflow-auto" style="max-height: 500px;">
